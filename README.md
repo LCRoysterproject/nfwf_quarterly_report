@@ -6,7 +6,7 @@ Tip: Figures can captions are also found separately.
   
 ### Folder Definition:  
 data- This folder contains continous and discrete water quality data. There is also a file for the sensor locations, `wq_point`, and river discharge data,`dis.rds`.     
-fig- This folder contains the figures for the quarterly report. 
+fig- This folder contains the figures for the quarterly report.   
 landing_report - This folder contains data, figures, and script for landings figures used for reporting. The folder data includes different variations of the landings data downloaded from FWC online. 
 script- This folder contains all the scripts used to create the quartely report figures. This folder does not contain the .rmd what will generate the whole report.  
 text- This folder contains the figure caption text.   
