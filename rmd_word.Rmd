@@ -45,7 +45,7 @@ if (max(dis$dates) < (Sys.Date() - 5)) {
 # Define start and end date of the plot
 ####ALWAYS CHANGE THIS DATE TO THE LAST UPLOAD TIME##################################################
 startDate <- ymd_hms("2018-01-01 00:00:00")
-endDate <- ymd_hms("2019-01-03 23:00:00")
+endDate <- ymd_hms("2019-04-10 23:00:00")
 
 # Create sequence of dates (so that NA is recognized by geom_line) and build a table of
 d <- seq(startDate, endDate, by = "hour")
@@ -74,7 +74,7 @@ dis2 <- dis %>%
 dis3 <- dis2 %>%
   expand(Site=unique(sal_summ$Site), dates) %>%
   left_join(dis2) %>%
-  mutate(Measure = "Discharge", minVal = -20, maxVal = val/1000 - 20) %>%
+  mutate(Measure = "Discharge", minVal = -20, maxVal = val/1000-20) %>%
   select(Site, d2 = dates, Measure, minVal, maxVal)
 
 ```
@@ -150,7 +150,7 @@ if (max(dis$dates) < (Sys.Date() - 5)) {
 # Define start and end date of the plot
 ####ALWAYS CHANGE THIS DATE TO THE LAST UPLOAD TIME#########################
 startDate <- ymd_hms("2018-01-01 00:00:00")
-endDate <- ymd_hms("2019-01-03 23:00:00")
+endDate <- ymd_hms("2019-04-10 23:00:00")
 
 # Create sequence of dates (so that NA is recognized by geom_line) and build a table of
 d <- seq(startDate, endDate, by = "hour")
@@ -261,7 +261,7 @@ if (max(dis$dates) < (Sys.Date() - 5)) {
 # Define start and end date of the plot
 ####ALWAYS CHANGE THIS DATE TO THE LAST UPLOAD TIME##################################################
 startDate <- ymd_hms("2018-01-01 00:00:00")
-endDate <- ymd_hms("2019-01-03 23:00:00")
+endDate <- ymd_hms("2019-04-10 23:00:00")
 
 # Create sequence of dates (so that NA is recognized by geom_line) and build a table of
 d <- seq(startDate, endDate, by = "hour")
@@ -368,7 +368,7 @@ if (max(dis$dates) < (Sys.Date() - 5)) {
 # Define start and end date of the plot
 ####ALWAYS CHANGE THIS DATE TO THE LAST UPLOAD TIME#########################
 startDate <- ymd_hms("2018-01-01 00:00:00")
-endDate <- ymd_hms("2019-01-03 23:00:00")
+endDate <- ymd_hms("2019-04-10 23:00:00")
 
 # Create sequence of dates (so that NA is recognized by geom_line) and build a table of
 d <- seq(startDate, endDate, by = "hour")
@@ -477,7 +477,7 @@ if (max(dis$dates) < (Sys.Date() - 5)) {
 # Define start and end date of the plot
 ####ALWAYS CHANGE THIS DATE TO THE LAST UPLOAD TIME##################################################
 startDate <- ymd_hms("2018-01-01 00:00:00")
-endDate <- ymd_hms("2019-01-03 23:00:00")
+endDate <- ymd_hms("2019-04-10 23:00:00")
 
 # Create sequence of dates (so that NA is recognized by geom_line) and build a table of
 d <- seq(startDate, endDate, by = "hour")
@@ -582,7 +582,7 @@ if (max(dis$dates) < (Sys.Date() - 5)) {
 # Define start and end date of the plot
 ####ALWAYS CHANGE THIS DATE TO THE LAST UPLOAD TIME#########################
 startDate <- ymd_hms("2018-01-01 00:00:00")
-endDate <- ymd_hms("2019-01-03 23:00:00")
+endDate <- ymd_hms("2019-04-10 23:00:00")
 
 # Create sequence of dates (so that NA is recognized by geom_line) and build a table of
 d <- seq(startDate, endDate, by = "hour")
@@ -695,7 +695,7 @@ if (max(dis$dates) < (Sys.Date() - 5)) {
 # Define start and end date of the plot
 ####ALWAYS CHANGE THIS DATE TO THE LAST UPLOAD TIME##################################################
 startDate <- ymd_hms("2018-01-01 00:00:00")
-endDate <- ymd_hms("2019-01-03 23:00:00")
+endDate <- ymd_hms("2019-04-10 23:00:00")
 
 # Create sequence of dates (so that NA is recognized by geom_line) and build a table of
 d <- seq(startDate, endDate, by = "hour")
@@ -805,7 +805,7 @@ if (max(dis$dates) < (Sys.Date() - 5)) {
 # Define start and end date of the plot
 ####ALWAYS CHANGE THIS DATE TO THE LAST UPLOAD TIME#########################
 startDate <- ymd_hms("2018-01-01 00:00:00")
-endDate <- ymd_hms("2019-01-03 23:00:00")
+endDate <- ymd_hms("2019-04-10 23:00:00")
 
 # Create sequence of dates (so that NA is recognized by geom_line) and build a table of
 d <- seq(startDate, endDate, by = "hour")
