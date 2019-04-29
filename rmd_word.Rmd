@@ -72,7 +72,7 @@ dis2 <- dis %>%
   filter(Datetime >= startDate & Datetime <= endDate)
 
 dis3 <- dis2 %>%
-  expand(Site=unique(sal_summ$Site), dates) %>%
+ expand(Site=unique(sal_summ$Site), dates) %>%
   left_join(dis2) %>%
   mutate(Measure = "Discharge", minVal = -20, maxVal = val/1000-20) %>%
   select(Site, d2 = dates, Measure, minVal, maxVal)
@@ -86,6 +86,8 @@ ggplot() +
   geom_line(data=sal_summ, aes(x=dsal2, y=meanVal, fill = "Salinity"), size= 1.1, color= "#0072B2") +
   geom_ribbon(data=dis3, aes(x=d2, ymax=maxVal, ymin=minVal, fill=Measure), 
               alpha=0.4) +
+  geom_ribbon(data=sal_summ, aes(x=dsal2, ymax=maxVal, ymin=minVal, fill=Measure), 
+              alpha=0.7) +
   xlab("Date") +
   scale_y_continuous(name = "Salinity(ppt)", 
                      limits=c(-20,40), 
@@ -200,6 +202,8 @@ ggplot() +
   geom_line(data=temp_summ, aes(x=dtemp2, y=meanVal, fill = "Temperature"), size= 1.1, color= "#D55E00") +
   geom_ribbon(data=dis3, aes(x=d2, ymax=maxVal, ymin=minVal, fill=Measure), 
               alpha=0.4) +
+  geom_ribbon(data=temp_summ, aes(x=dtemp2, ymax=maxVal, ymin=minVal, fill=Measure), 
+              alpha=0.7) +
   xlab("Date") +
   scale_y_continuous(name = "Temperature (C)", 
                      limits=c(-20,40), 
@@ -308,6 +312,8 @@ ggplot() +
   geom_line(data=sal_summ, aes(x=dsal2, y=meanVal, fill = "Salinity"), size= 1.1, color= "#0072B2") +
   geom_ribbon(data=dis3, aes(x=d2, ymax=maxVal, ymin=minVal, fill=Measure), 
               alpha=0.4) +
+  geom_ribbon(data=sal_summ, aes(x=dsal2, ymax=maxVal, ymin=minVal, fill=Measure), 
+              alpha=0.7) +
   xlab("Date") +
   scale_y_continuous(name = "Salinity(ppt)", 
                      limits=c(-20,40), 
@@ -418,6 +424,8 @@ ggplot() +
   geom_line(data=temp_summ, aes(x=dtemp2, y=meanVal, fill = "Temperature"), size= 1.1, color= "#D55E00") +
   geom_ribbon(data=dis3, aes(x=d2, ymax=maxVal, ymin=minVal, fill=Measure), 
               alpha=0.4) +
+  geom_ribbon(data=temp_summ, aes(x=dtemp2, ymax=maxVal, ymin=minVal, fill=Measure), 
+              alpha=0.7) +
   xlab("Date") +
   scale_y_continuous(name = "Temperature (C)", 
                      limits=c(-20,40), 
@@ -523,6 +531,8 @@ ggplot() +
   geom_line(data=sal_summ, aes(x=dsal2, y=meanVal, fill = "Salinity"), size= 1.1, color= "#0072B2") +
   geom_ribbon(data=dis3, aes(x=d2, ymax=maxVal, ymin=minVal, fill=Measure), 
               alpha=0.4) +
+  geom_ribbon(data=sal_summ, aes(x=dsal2, ymax=maxVal, ymin=minVal, fill=Measure), 
+              alpha=0.7) +
   xlab("Date") +
   scale_y_continuous(name = "Salinity(ppt)", 
                      limits=c(-20,40), 
@@ -633,6 +643,8 @@ ggplot() +
   geom_line(data=temp_summ, aes(x=dtemp2, y=meanVal, fill = "Temperature"), size= 1.1, color= "#D55E00") +
   geom_ribbon(data=dis3, aes(x=d2, ymax=maxVal, ymin=minVal, fill=Measure), 
               alpha=0.4) +
+  geom_ribbon(data=temp_summ, aes(x=dtemp2, ymax=maxVal, ymin=minVal, fill=Measure), 
+              alpha=0.7) +
   xlab("Date") +
   scale_y_continuous(name = "Temperature (C)", 
                      limits=c(-20,40), 
@@ -743,6 +755,8 @@ ggplot() +
   geom_line(data=sal_summ, aes(x=dsal2, y=meanVal, fill = "Salinity"), size= 1.1, color= "#0072B2") +
   geom_ribbon(data=dis3, aes(x=d2, ymax=maxVal, ymin=minVal, fill=Measure), 
               alpha=0.4) +
+  geom_ribbon(data=sal_summ, aes(x=dsal2, ymax=maxVal, ymin=minVal, fill=Measure), 
+              alpha=0.7) +
   xlab("Date") +
   scale_y_continuous(name = "Salinity(ppt)", 
                      limits=c(-20,40), 
@@ -855,6 +869,8 @@ ggplot() +
   geom_line(data=temp_summ, aes(x=dtemp2, y=meanVal, fill = "Temperature"), size= 1.1, color= "#D55E00") +
   geom_ribbon(data=dis3, aes(x=d2, ymax=maxVal, ymin=minVal, fill=Measure), 
               alpha=0.4) +
+  geom_ribbon(data=temp_summ, aes(x=dtemp2, ymax=maxVal, ymin=minVal, fill=Measure), 
+              alpha=0.7) +
   xlab("Date") +
   scale_y_continuous(name = "Temperature (C)", 
                      limits=c(-20,40), 
