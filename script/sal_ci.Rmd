@@ -285,7 +285,7 @@ ggplot() +
   
   geom_line(data= wq_temp789, aes(x = Obs_Date, y = temp.mean, fill= "Temperature"), color= "#D55E00") +
   
-  geom_ribbon(data=dis3, aes(x= as.POSIXct(d2), ymax=maxVal, ymin=minVal, fill=Measure), 
+  geom_ribbon(data=dis_789, aes(x= as.POSIXct(d2), ymax=maxVal, ymin=minVal, fill=Measure), 
               alpha=0.4) +
   
   xlab("Date") +
@@ -327,36 +327,27 @@ Figure 4.  Temperature and discharge data collected from autonomous sensors from
 ```{r sal_654, warning= FALSE, message= FALSE, include= FALSE}
 
 # Sensor water quality carpentry
-wq <- read.csv("data/wq.csv", header= T) %>%
-  filter(Site != 0)
-wq$Date <- wq$Date %>% ymd_hms %>% round_date(unit="hour")
-wq$Site <- factor(wq$Site, levels = c("6", "5","4"))
+wq_654 <- wq2 %>% 
+  filter( Site == c("6", "5", "4"))
 
+wq_654$Site <- factor(wq_654$Site, levels = c("6", "5","4"))
 
-dsal <- seq(startDate, endDate, by = "hour")
-
-sal_654<- expand(wq, Site, Date=dsal) %>%
-  left_join(wq, by=c("Site" = "Site", "Date" = "Date")) %>%
-  select(Site, Date, Salinity)
-
-sal_654$dsal2 <- date(sal_654$Date)
-
-
-dis3 <- dis2 %>%
-  expand(Site=unique(sal_654$Site), dates) %>%
+dis_654 <- dis2 %>%
+ expand(Site=unique(wq_654$Site), dates) %>%
   left_join(dis2) %>%
-  mutate(Measure = "Discharge", minVal = -20, maxVal = val/1000 - 20) %>%
+  mutate(Measure = "Discharge", minVal = -20, maxVal = val/1000-20) %>%
   select(Site, d2 = dates, Measure, minVal, maxVal)
 
 ```
 
 ```{r sal_plot654, echo=FALSE, warning= FALSE, message= FALSE}
 ggplot() +
+
+  geom_ribbon(data= wq_654, aes( x= Obs_Date, ymin = sal.mean - 1.96*sal.sd, ymax = sal.mean + 1.96*sal.sd), fill = "grey70") +
   
- geom_smooth(data= sal_654, aes(x=dsal2, y= Salinity, fill= "Salinity"),level= 0.95, se= TRUE, color= "black") +
-
-
-  geom_ribbon(data=dis3, aes(x=d2, ymax=maxVal, ymin=minVal, fill=Measure), 
+  geom_line(data= wq_654, aes(x = Obs_Date, y = sal.mean, fill= "Salinity")) +
+  
+  geom_ribbon(data=dis_654, aes(x= as.POSIXct(d2), ymax=maxVal, ymin=minVal, fill=Measure), 
               alpha=0.4) +
   
   xlab("Date") +
@@ -368,8 +359,7 @@ ggplot() +
                                          name = "River Discharge (1,000 cfs)
                                          ",
                                          breaks = seq(0, 30, 15))) +
-  
-  scale_x_date(date_breaks = "4 months", date_labels = "%b %Y", expand = c(0, 0)) +
+
   
   scale_fill_manual(values = c("#56B4E9", "#000000")) +
   
@@ -391,40 +381,23 @@ ggplot() +
   
   facet_wrap(~ Site, ncol=1, labeller = label_both)
 
-
 ```
   
 Figure 5.  Salinity and discharge data collected from autonomous sensors from the Lone Cabbage Reef restoration site near Suwannee, FL.  Each graph represents a sensor location, with top of page as north, and right of page as east.  The figures (Sites 4-6) represent the western side of the Lone Cabbage Reef restoration site. The primary y-axis is Salinity (ppt, parts per thousand), and the secondary y-axis is Suwannee River discharge (CFS, cubic feet per second) measured at USGS Wilcox station 02323500 on the Suwannee River.  River discharge is graphed as a daily mean in the light blue filled shape near the bottom of each graph. Salinity values (black line) are depicted using a 95% confidence interval, meaing that the interval is a range of values that are 95% certain to contain the true mean. Mean salinity and confidence interval values do not vary grealty. 
 
 ```{r temp_654, warning= FALSE, message= FALSE, include= FALSE}
 # Sensor water quality carpentry
-wq <- read.csv("data/wq.csv", header= T) %>%
-  filter(Site != 0)
-wq$Date <- wq$Date %>% ymd_hms %>% round_date(unit="hour")
-wq$Site <- factor(wq$Site, levels = c("6",  "5", "4"))
 
-sal_temp <- expand(wq, Site, Date=d) %>%
-  left_join(wq, by=c("Site" = "Site", "Date" = "Date")) %>%
-  select(Site, Date, Salinity, Temperature)
+wq_temp654 <- wq_temp2 %>% 
+  filter( Site == c("6", "5", "4"))
 
-sal_temp$d2 <- date(sal_temp$Date)
+wq_temp789$Site <- factor(wq_temp789$Site, levels = c("7", "8","9"))
 
-dtemp <- seq(startDate, endDate, by = "hour")
-
-temp_654 <- expand(wq, Site, Date=dtemp) %>%
-  filter(Site %in% c("6","5","4"))%>%
-  left_join(wq, by=c("Site" = "Site", "Date" = "Date")) %>%
-  select(Site, Date, Temperature)
-
-temp_654$dtemp2 <- date(temp_654$Date)
-
-
-dis3 <- dis2 %>%
-  expand(Site=unique(temp_654$Site), dates) %>%
+dis_789 <- dis2 %>%
+ expand(Site=unique(wq_temp789$Site), dates) %>%
   left_join(dis2) %>%
-  mutate(Measure = "Discharge", minVal = -20, maxVal = val/1000 - 20) %>%
+  mutate(Measure = "Discharge", minVal = -20, maxVal = val/1000-20) %>%
   select(Site, d2 = dates, Measure, minVal, maxVal)
-
 
 ```
 
