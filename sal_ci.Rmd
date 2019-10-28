@@ -96,7 +96,7 @@ ggplot() +
   
   scale_y_continuous(name = "Salinity(ppt)", 
                      limits=c(-20,40), 
-                     breaks = c(0, 40, 10, 20, 30),
+                     breaks = c(0, 10, 20, 30, 40),
                      sec.axis = sec_axis(~(.+20), 
                                          name = "River Discharge (1,000 cfs)
                                          ",
@@ -175,7 +175,7 @@ ggplot() +
   
   scale_y_continuous(name = "Temperature(C)", 
                      limits=c(-20,40), 
-                     breaks = seq(0, 40, 10),
+                     breaks = c(0, 10,20,30,40),
                      sec.axis = sec_axis(~(.+20), 
                                          name = "River Discharge (1,000 cfs)
                                          ",
@@ -240,7 +240,7 @@ ggplot() +
   
   scale_y_continuous(name = "Salinity(ppt)", 
                      limits=c(-20,40), 
-                     breaks = seq(0, 40, 10),
+                     breaks = c(0, 10,20,30,40),
                      sec.axis = sec_axis(~(.+20), 
                                          name = "River Discharge (1,000 cfs)
                                          ",
@@ -306,7 +306,7 @@ ggplot() +
   
   scale_y_continuous(name = "Temperature(C)", 
                      limits=c(-20,40), 
-                     breaks = seq(0, 40, 10),
+                     breaks = c(0, 10,20,30,40),
                      sec.axis = sec_axis(~(.+20), 
                                          name = "River Discharge (1,000 cfs)
                                          ",
@@ -371,11 +371,11 @@ ggplot() +
   
   scale_y_continuous(name = "Salinity(ppt)", 
                      limits=c(-20,40), 
-                     breaks = seq(0, 40, 10),
+                     breaks = c(0, 10,20,30,40),
                      sec.axis = sec_axis(~(.+20), 
                                          name = "River Discharge (1,000 cfs)
                                          ",
-                                         breaks = (c(0, 10, 20, 30, 40)))) +
+                                         breaks = waiver())) +
    
   scale_x_datetime(breaks = seq(as.POSIXct("2018-01-01"),
                  as.POSIXct("2019-10-01"), "2 months"), date_labels = "%b %Y",expand = c(0, 0)) +
@@ -437,7 +437,7 @@ ggplot() +
   
   scale_y_continuous(name = "Temperature(C)", 
                      limits=c(-20,40), 
-                     breaks = seq(0, 40, 10),
+                     breaks = c(0, 10,20,30,40),
                      sec.axis = sec_axis(~(.+20), 
                                          name = "River Discharge (1,000 cfs)
                                          ",
@@ -502,7 +502,7 @@ ggplot() +
   
   scale_y_continuous(name = "Salinity(ppt)", 
                      limits=c(-20,40), 
-                     breaks = seq(0, 40, 10),
+                     breaks = c(0, 10,20,30,40),
                      sec.axis = sec_axis(~(.+20), 
                                          name = "River Discharge (1,000 cfs)
                                          ",
@@ -567,7 +567,7 @@ ggplot() +
   
   scale_y_continuous(name = "Temperature(C)", 
                      limits=c(-20,40), 
-                     breaks = seq(0, 40, 10),
+                     breaks = c(0, 10,20,30,40),
                      sec.axis = sec_axis(~(.+20), 
                                          name = "River Discharge (1,000 cfs)
                                          ",
