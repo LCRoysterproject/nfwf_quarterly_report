@@ -11,7 +11,7 @@ library("scales")
 library("ggpubr")
 
 #Updated csv manually through FWC Commercial landings website
-landings <- read.csv("data/landings.csv", header= T)
+landings <- read.csv("data/oys_landings/landings.csv", header= T)
 
 
 stland<-ggplot(data=landings, aes(x=Year, y=State_landings))+
@@ -155,20 +155,20 @@ ggdraw() +
   draw_plot(apstland, x=0.67, y=0, width=0.3, height=0.30 ) +
   draw_plot(apsttrip, x=0.67, y=0.3, width=0.3, height=0.30 ) +
   draw_plot(apstpertrip, x=0.67, y=0.6, width=0.3, height=0.30 )
-ggsave("pic/alllandslines86_12.tiff", units="in", width=25, height=25, dpi=300, compression = 'lzw')
+ggsave("writing/figures/oys_landings/alllandslines86_12.tiff", units="in", width=25, height=25, dpi=300, compression = 'lzw')
 
 
 sws_plots12_18<-plot_grid(swstland,swsttrip,swstpertrip, ncol=1)
 
-ggsave("pic/suw_plots12_18.tiff", units="in", width=8, height=12, dpi=300, compression = 'lzw')
+ggsave("writing/figures/oys_landings/suw_plots12_18.tiff", units="in", width=8, height=12, dpi=300, compression = 'lzw')
 
 st_plots12_18<-plot_grid(stland,sttrip,stpertrip, ncol=1)
 
-ggsave("pic/st_plots12_18.tiff", units="in", width=8, height=12, dpi=300, compression = 'lzw')
+ggsave("writing/figures/oys_landings/st_plots12_18.tiff", units="in", width=8, height=12, dpi=300, compression = 'lzw')
 
 
 apa_plots12_18<-plot_grid(apstland,apsttrip,apstpertrip, ncol=1)
 
-ggsave("pic/apa_plots12_18.tiff", units="in", width=8, height=12, dpi=300, compression = 'lzw')
+ggsave("writing/figures/oys_landings/apa_plots12_18.tiff", units="in", width=8, height=12, dpi=300, compression = 'lzw')
 
 

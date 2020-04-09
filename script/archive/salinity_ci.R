@@ -2,7 +2,7 @@ library(ggplot2)
 library(reshape2)
 
 
-wq <- read.csv("C:/Users/stephen.parker/Downloads/wq.csv",header=TRUE)
+wq <- read.csv("data/wq/wq.csv",header=TRUE)
 
 #Change class? of date and year
 wq$Obs_Date <- as.POSIXct (wq$Obs_Date)

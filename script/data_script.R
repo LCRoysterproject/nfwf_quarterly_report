@@ -39,7 +39,7 @@ wq$observation_datetime<- as.Date(wq$observation_datetime, tz="EST",usetz=TRUE)
 
 colnames(wq) <- c("ID", "Obs_Date", "In_Service", "Pressure", "Temperature", "Conductivity", "Salinity_OG", "Sound_velo",  "Site","Sensor_ID", "Salinity","Date")
 
-write.csv(wq,file = "data/wq_total.csv")
+write.csv(wq,file = "data/wq/wq_total.csv")
 
 ## Removing any values over 40 ppt
 wq<-wq %>% 
@@ -104,7 +104,7 @@ wq<-wq %>%
 
 
 #Writting as a .csv for the Shiny App
-write.csv(wq,file = "data/wq.csv")
+write.csv(wq,file = "data/wq/wq.csv")
 
 
 
@@ -131,7 +131,7 @@ lab<-lab %>%
   filter(!(Site == 0))
 
 #Writting as a .csv for the Shiny App
-write.csv(lab, file = "data/lab.csv")
+write.csv(lab, file = "data/wq/lab.csv")
 
 
 
