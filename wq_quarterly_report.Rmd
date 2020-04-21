@@ -20,7 +20,7 @@ library("scales")
 ```{r salinity_data_processing, include=FALSE, warning=FALSE, message= FALSE}
 
 # Sensor water quality carpentry
-wq <- read.csv("data\\wq.csv", header= T) %>%
+wq <- read.csv("data/wq/wq.csv", header= T) %>%
   filter(Site != 0)
 
 #Change class? of date and year
@@ -54,7 +54,7 @@ wq2$Site <- factor(wq2$Site, levels = c("6", "1", "7", "5", "2", "8","4", "3", "
 # Water discharge carpentry (dynamically updating local discharge file)
 station = '02323500' 
 stinfo  = siteInfo(station)
-dis <- read_rds("data\\dis.rds")
+dis <- read_rds("data/wq/dis.rds")
 if (max(dis$dates) < (Sys.Date() - 5)) {
   sdate <- max(dis$dates) + 1
   newdis <- importDVs(staid = station, code = '00060', stat = '00003', 
@@ -66,7 +66,7 @@ if (max(dis$dates) < (Sys.Date() - 5)) {
 
 # Start and end dates for all figures
 startDate <- ymd_hms("2018-01-01 00:00:00")
-endDate <- ymd_hms("2020-01-01 23:00:00")
+endDate <- ymd_hms("2020-04-01 23:00:00")
 
 dis2 <- dis %>%
   mutate(Datetime = paste(dates, " 12:00:00") %>% ymd_hms()) %>%
@@ -103,7 +103,7 @@ ggplot() +
                                          breaks = waiver())) +
    
   scale_x_datetime(breaks = seq(as.POSIXct("2018-01-01"),
-                 as.POSIXct("2020-01-01"), "4 months"), date_labels = "%b %Y",expand = c(0, 0)) +
+                 as.POSIXct("2020-04-01"), "4 months"), date_labels = "%b %Y",expand = c(0, 0)) +
 
   
   scale_fill_manual(values = c("#56B4E9", "#000000")) +
@@ -183,7 +183,7 @@ ggplot() +
                                          breaks = waiver())) +
   
   scale_x_datetime(breaks = seq(as.POSIXct("2018-01-01"),
-                 as.POSIXct("2020-01-01"), "4 months"), date_labels = "%b %Y",expand = c(0, 0)) +
+                 as.POSIXct("2020-04-01"), "4 months"), date_labels = "%b %Y",expand = c(0, 0)) +
 
   
   scale_fill_manual(values = c("#56B4E9", "#D55E00")) +
@@ -249,7 +249,7 @@ ggplot() +
                                          breaks = waiver())) +
   
   scale_x_datetime(breaks = seq(as.POSIXct("2018-01-01"),
-                 as.POSIXct("2020-01-01"), "2 months"), date_labels = "%b %Y",expand = c(0, 0)) +
+                 as.POSIXct("2020-04-01"), "2 months"), date_labels = "%b %Y",expand = c(0, 0)) +
 
   
   scale_fill_manual(values = c("#56B4E9", "#000000")) +
@@ -316,7 +316,7 @@ ggplot() +
                                          breaks = waiver())) +
    
   scale_x_datetime(breaks = seq(as.POSIXct("2018-01-01"),
-                 as.POSIXct("2020-01-01"), "2 months"), date_labels = "%b %Y",expand = c(0, 0)) +
+                 as.POSIXct("2020-04-01"), "2 months"), date_labels = "%b %Y",expand = c(0, 0)) +
 
   
   scale_fill_manual(values = c("#56B4E9", "#D55E00")) +
@@ -382,7 +382,7 @@ ggplot() +
                                          breaks = waiver())) +
    
   scale_x_datetime(breaks = seq(as.POSIXct("2018-01-01"),
-                 as.POSIXct("2020-01-01"), "2 months"), date_labels = "%b %Y",expand = c(0, 0)) +
+                 as.POSIXct("2020-04-01"), "2 months"), date_labels = "%b %Y",expand = c(0, 0)) +
 
   
   scale_fill_manual(values = c("#56B4E9", "#000000")) +
@@ -449,7 +449,7 @@ ggplot() +
                                          breaks = waiver())) +
  
   scale_x_datetime(breaks = seq(as.POSIXct("2018-01-01"),
-                 as.POSIXct("2020-01-01"), "2 months"), date_labels = "%b %Y",expand = c(0, 0)) +
+                 as.POSIXct("2020-04-01"), "2 months"), date_labels = "%b %Y",expand = c(0, 0)) +
   
   scale_fill_manual(values = c("#56B4E9", "#D55E00")) +
   
@@ -515,7 +515,7 @@ ggplot() +
                                          breaks = waiver())) +
    
   scale_x_datetime(breaks = seq(as.POSIXct("2018-01-01"),
-                 as.POSIXct("2020-01-01"), "2 months"), date_labels = "%b %Y",expand = c(0, 0)) +
+                 as.POSIXct("2020-04-01"), "2 months"), date_labels = "%b %Y",expand = c(0, 0)) +
 
   
   scale_fill_manual(values = c("#56B4E9", "#000000")) +
@@ -581,7 +581,7 @@ ggplot() +
                                          breaks = waiver())) +
    
   scale_x_datetime(breaks = seq(as.POSIXct("2018-01-01"),
-                 as.POSIXct("2020-01-01"), "2 months"), date_labels = "%b %Y",expand = c(0, 0)) +
+                 as.POSIXct("2020-04-01"), "2 months"), date_labels = "%b %Y",expand = c(0, 0)) +
 
   
   scale_fill_manual(values = c("#56B4E9", "#D55E00")) +
