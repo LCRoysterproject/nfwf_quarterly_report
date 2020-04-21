@@ -9,6 +9,10 @@ library("RMariaDB")
 #devtools::install_github("r-dbi/DBI")
 
 
+#Loading the .env file
+readRenviron(".env")
+
+
 # In case if there are too many connections open
 lapply(dbListConnections(MySQL()), dbDisconnect)
 
@@ -17,9 +21,9 @@ lapply(dbListConnections(MySQL()), dbDisconnect)
 
 con <- dbConnect(RMariaDB::MariaDB(),
                  user="LCRoysterproject", 
-                 password="HLLV6Pske0vTzhIZfSya",
-                 dbname="LCRoysterproject", 
-                 host="ict-prod-hosting05.mysql.osg.ufl.edu", 
+                 password=Sys.getenv("password"),
+                 dbname=Sys.getenv("dbname"), 
+                 host=Sys.getenv("host"), 
                  port= 3359)
 
 # Listing all of the columns in the database
@@ -39,7 +43,7 @@ wq$observation_datetime<- as.Date(wq$observation_datetime, tz="EST",usetz=TRUE)
 
 colnames(wq) <- c("ID", "Obs_Date", "In_Service", "Pressure", "Temperature", "Conductivity", "Salinity_OG", "Sound_velo",  "Site","Sensor_ID", "Salinity","Date")
 
-write.csv(wq,file = "data/wq/wq_total.csv")
+write.csv(wq,file = "data/wq_total.csv")
 
 ## Removing any values over 40 ppt
 wq<-wq %>% 
@@ -86,6 +90,9 @@ wq<-wq %>%
 wq<-wq %>% 
   filter(!(Site == 4 & Date > "2019-11-11 23:00:00" & Date < "2019-11-18 23:00:00"))
 
+#Removing all the observations from after 2020/04/09
+wq<-wq %>% 
+  filter(!(Date > "2020-04-10 23:00:00"))
 
 #Removing all trial 
 wq<-wq %>% 
@@ -104,7 +111,7 @@ wq<-wq %>%
 
 
 #Writting as a .csv for the Shiny App
-write.csv(wq,file = "data/wq/wq.csv")
+write.csv(wq,file = "data/wq.csv")
 
 
 
@@ -124,14 +131,13 @@ colnames(lab) <- c("ID", "Date", "Phosphorus", "Nitrogen", "Chlorophyll", "Secch
 lab$Secchi<- (lab$Secchi/ 3.28)
 
 # We need to update the sensor_type to the correct names for facetting, 4= YSI and 5= Lakewatch 
-lab$Sensor_Type[lab$Sensor_Type == "4"] <- "LAKEWATCH"
-lab$Sensor_Type[lab$Sensor_Type == "5"] <- "YSI"
+lab$Sensor_Type[lab$Sensor_Type == "34"] <- "LAKEWATCH"
+lab$Sensor_Type[lab$Sensor_Type == "35"] <- "YSI"
 
 lab<-lab %>% 
   filter(!(Site == 0))
 
 #Writting as a .csv for the Shiny App
-write.csv(lab, file = "data/wq/lab.csv")
-
+write.csv(lab, file = "data/lab.csv")
 
 

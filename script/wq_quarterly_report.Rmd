@@ -21,7 +21,7 @@ library("ggplot2")
 ```{r salinity_data_processing, include=FALSE, warning=FALSE}
 
 
-source("script/dailyFunctions.R")
+source("C:/Users/Mel/Desktop/nfwf_quarterly_report/script/dailyFunctions.R")
 
 # Sensor water quality carpentry
 wq <- read.csv("data/wq.csv", header= T) %>%
