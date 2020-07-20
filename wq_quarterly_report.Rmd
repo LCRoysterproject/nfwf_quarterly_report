@@ -21,7 +21,7 @@ library("scales")
 
 # Sensor water quality carpentry
 wq <- read.csv("data/wq/wq.csv", header= T) %>%
-  filter(Site != 0)
+  filter(Site != 0) 
 
 #Change class? of date and year
 wq$Obs_Date <- as.POSIXct (wq$Obs_Date)
@@ -103,7 +103,7 @@ ggplot() +
                                          breaks = waiver())) +
    
   scale_x_datetime(breaks = seq(as.POSIXct("2018-01-01"),
-                 as.POSIXct("2020-04-01"), "3 months"), date_labels = "%b %Y",expand = c(0, 0)) +
+                 as.POSIXct("2020-04-01"), "4 months"), date_labels = "%b %Y",expand = c(0, 0)) +
 
   
   scale_fill_manual(values = c("#56B4E9", "#000000")) +
@@ -183,7 +183,7 @@ ggplot() +
                                          breaks = waiver())) +
   
   scale_x_datetime(breaks = seq(as.POSIXct("2018-01-01"),
-                 as.POSIXct("2020-04-01"), "3 months"), date_labels = "%b %Y",expand = c(0, 0)) +
+                 as.POSIXct("2020-04-01"), "4 months"), date_labels = "%b %Y",expand = c(0, 0)) +
 
   
   scale_fill_manual(values = c("#56B4E9", "#D55E00")) +
