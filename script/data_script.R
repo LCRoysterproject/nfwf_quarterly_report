@@ -45,7 +45,6 @@ colnames(wq) <- c("ID", "Obs_Date", "In_Service", "Pressure", "Temperature", "Co
 
 write.csv(wq,file = "data/wq/wq_total.csv")
 
-## Removing any values over 40 ppt
 wq<-wq %>% 
   filter(!(Salinity > 40))
 
@@ -86,13 +85,34 @@ wq<-wq %>%
   filter(!(Site == 2 & Date > "2019-10-01 23:00:00" & Date < "2019-10-15 23:00:00"))
 
 
-#Removing observations from site $, Flatilined and muddy starting november 12- november 18
+#Removing observations from site 4, Flatilined and muddy starting november 12- november 18
 wq<-wq %>% 
   filter(!(Site == 4 & Date > "2019-11-11 23:00:00" & Date < "2019-11-18 23:00:00"))
 
 #Removing all the observations from after 2020/04/09
 wq<-wq %>% 
-  filter(!(Date > "2020-04-10 23:00:00"))
+  filter(!(Date > "2020-04-09 23:00:00" & Date < "2020-06-10 23:00:00"))
+
+#Removing observations from site 5, flatlines
+wq<-wq %>% 
+  filter(!(Site == 5 & Date > "2020-07-15 00:00:00" & Date < "2020-07-31 00:00:00"))
+
+#Removing observations from site 10, Flatilined on last day
+wq<-wq %>% 
+  filter(!(Site == 10 & Date > "2020-08-26 00:00:00" & Date < "2020-08-27 23:00:00"))
+
+#Removing observations from site 8, Flatilined on last observation
+wq<-wq %>% 
+  filter(!(Site == 8 & Date > "2020-08-26 00:00:00" & Date < "2020-08-27 23:00:00"))
+
+
+#Removing observations from site 5, Flatilined during this whole duration, barnacle growing on sensor
+wq<-wq %>% 
+  filter(!(Site == 5 & Date > "2020-09-01 00:00:00" & Date < "2020-09-23 23:00:00"))
+
+#Removing observations from site 10, sensor dropped observation on last day, removing
+wq<-wq %>% 
+  filter(!(Site == 10 & Date > "2020-09-22 00:00:00" & Date < "2020-09-23 23:00:00"))
 
 #Removing all trial 
 wq<-wq %>% 
@@ -108,7 +128,6 @@ wq<-wq %>%
   filter(!(Site ==22))
 wq<-wq %>% 
   filter(!(Site ==23))
-
 
 #Writting as a .csv for the Shiny App
 write.csv(wq,file = "data/wq/wq.csv")
