@@ -1,14 +1,24 @@
-wind <- read_rds("wq_lcr_shiny_app/data/wind.rds")
+library("tidyverse")
+library("lubridate")
+library("ncdf4")
+library("rnoaa")
+library("RColorBrewer")
+library("scales")
+
+
+###Wind data
+wind20 <- buoy(dataset='cwind',buoyid='CDRF1', datatype='c', year=2020)
+wind21 <- buoy(dataset='cwind',buoyid='CDRF1', datatype='c', year=2021)
+wind <- rbind(wind20$data, wind21$data) %>% dplyr::distinct()
 
 # Shrink the wind table, and convert the format of time
 wind$time <- ymd_hms(wind$time)
-
 
 plot.windrose <- function(data,
                           spd,
                           dir,
                           spdres = 2,
-                          dirres = 30,
+                          dirres = 22.5,
                           spdmin = 2,
                           spdmax = 20,
                           spdseq = NULL,
@@ -74,8 +84,6 @@ plot.windrose <- function(data,
                          breaks = spd.breaks,
                          labels = spd.labels,
                          ordered_result = TRUE)
-  # clean up the data
-  data. <- na.omit(data)
   
   # figure out the wind direction bins
   dir.breaks <- c(-dirres/2,
@@ -97,31 +105,50 @@ plot.windrose <- function(data,
   if (debug>0){    
     cat(dir.breaks,"\n")
     cat(dir.labels,"\n")
-    cat(levels(dir.binned),"\n")       
+    cat(levels(dir.binned),"\n")
+    
   }  
   
-  # deal with change in ordering introduced somewhere around version 2.2
-  if(packageVersion("ggplot2") > "2.2"){    
-    cat("Hadley broke my code\n")
-    data$spd.binned = with(data, factor(spd.binned, levels = rev(levels(spd.binned))))
-    spd.colors = rev(spd.colors)
-  }
   
-  # create the plot ----
-  p.windrose <- ggplot(data = data,
-                       aes(x = dir.binned,
-                           fill = spd.binned)) +
-    geom_bar() + 
+  # Create the labels:
+  x_location <- pi # x location of the labels
+  
+  # Get the percentage
+  T_data <- data %>%
+    dplyr::group_by(dir.binned) %>%
+    dplyr::summarise(count= n()) %>%
+    dplyr::mutate(y = count/sum(count))
+  
+  labels <- data.frame(x = x_location,
+                       y = scales::extended_breaks()(range(T_data$y)))
+  
+  
+  # create the plot ---
+  
+  p.windrose <- ggplot() +
+    geom_bar(data = data,
+             aes(x = dir.binned, y = (..count..)/sum(..count..),
+                 fill = spd.binned))+
+    geom_text(data = labels,
+              aes(x=x, y=y, label = scales::percent(y, 1))) +
+    scale_y_continuous(breaks = waiver(),labels=NULL)+
     scale_x_discrete(drop = FALSE,
-                     labels = waiver()) +
+                     labels = c("N","NNE","NE","ENE", "E", 
+                                "ESE", "SE","SSE", 
+                                "S","SSW", "SW","WSW", "W", 
+                                "WNW","NW","NNW")) +
+    ylab("")+xlab("")+
     coord_polar(start = -((dirres/2)/360) * 2*pi) +
     scale_fill_manual(name = "Wind Speed (m/s)", 
                       values = spd.colors,
                       drop = FALSE) +
-    #theme_bw() +
     theme(axis.title.x = element_blank(),
-          #panel.border = element_rect(colour = "blank"),
-          panel.grid.major = element_line(colour="grey65"))
+          axis.text = element_text(size=13, face= "bold"), 
+          axis.title = element_text(size=13, face= "bold"),
+          legend.text = element_text(size = 12),
+          axis.text.y=element_blank(),
+          axis.ticks.y=element_blank())
+  
   
   # adjust axes if required
   if (!is.na(countmax)){
@@ -137,53 +164,36 @@ plot.windrose <- function(data,
 }
 
 
+
 wind0 <- wind %>%
-  filter(time >= "2020-03-01 00:00:00" & time <= "2020-03-31 00:00:00") %>%
+  filter(time >= "2020-12-01 00:00:00" & time <= "2020-12-31 00:00:00") %>%
   select(time, wind_spd, wind_dir)
 
-
-
 wind1 <- wind %>%
-  filter(time >= "2020-04-01 00:00:00" & time <= "2020-04-30 00:00:00") %>%
+  filter(time >= "2021-01-01 00:00:00" & time <= "2021-01-31 00:00:00") %>%
   select(time, wind_spd, wind_dir)
 
 
 wind2 <- wind %>%
-  filter(time >= "2020-05-01 00:00:00" & time <= "2020-05-31 00:00:00") %>%
-  select(time, wind_spd, wind_dir)
-
-wind3 <- wind %>%
-  filter(time >= "2020-06-01 00:00:00" & time <= "2020-06-30 00:00:00") %>%
+  filter(time >= "2021-02-01 00:00:00" & time <= "2021-02-28 00:00:00") %>%
   select(time, wind_spd, wind_dir)
 
 
-wind4 <- wind %>%
-  filter(time >= "2020-07-01 00:00:00" & time <= "2020-07-15 00:00:00") %>%
-  select(time, wind_spd, wind_dir)
+dec_plot<-plot.windrose(spd = wind0$wind_spd,
+                        dir = wind0$wind_dir)
+
+jan_plot<-plot.windrose(spd = wind1$wind_spd,
+                        dir = wind1$wind_dir)
 
 
-
-march_plot<-plot.windrose(spd = wind0$wind_spd,
-                         dir = wind0$wind_dir)
-
-
-april_plot<-plot.windrose(spd = wind1$wind_spd,
-                    dir = wind1$wind_dir)
+feb_plot<-plot.windrose(spd = wind2$wind_spd,
+                        dir = wind2$wind_dir)
 
 
-
-may_plot<-plot.windrose(spd = wind2$wind_spd,
-                          dir = wind2$wind_dir)
-
-
-june_plot<-plot.windrose(spd = wind3$wind_spd,
-                        dir = wind3$wind_dir)
 
 
 library("cowplot")
 
-plot_grid(march_plot, april_plot, may_plot, june_plot, labels = c("A", "B", "C", "D"), 
+plot_grid(dec_plot, jan_plot, feb_plot, labels = c("A", "B", "C"), 
           label_size = 16)
-
-
 

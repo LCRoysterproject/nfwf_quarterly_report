@@ -24,7 +24,7 @@ wq <- read.csv("data/wq/wq.csv", header= T) %>%
   filter(Site != 0) 
 
 wq<-wq %>% 
-  filter(Obs_Date > "2020-09-01 00:00:00" & Obs_Date < "2021-01-10 23:00:00")
+  filter(Obs_Date > "2021-01-01 00:00:00" & Obs_Date < "2021-03-31 23:00:00")
 
 wq$year <- strftime(wq$Obs_Date, format = "%Y")
 
@@ -134,8 +134,8 @@ if (max(dis$dates) < (Sys.Date() - 5)) {
 }
 
 # Start and end dates for all figures
-startDate <- ymd_hms("2020-09-01 00:00:00")
-endDate <- ymd_hms("2021-01-10 23:00:00")
+startDate <- ymd_hms("2021-01-01 00:00:00")
+endDate <- ymd_hms("2021-03-31 23:00:00")
 
 dis2 <- dis %>%
   mutate(Datetime = paste(dates, " 12:00:00") %>% ymd_hms()) %>%
@@ -172,8 +172,8 @@ ggplot() +
                                          ",
                                          breaks = waiver())) +
    
-  scale_x_datetime(breaks = seq(as.POSIXct("2020-09-01"),
-                 as.POSIXct("2021-01-10"), "1 month"), date_labels = "%b %Y",expand = c(0, 0)) +
+  scale_x_datetime(breaks = seq(as.POSIXct("2021-01-01"),
+                 as.POSIXct("2021-03-31"), "2 weeks"), date_labels = "%b %d %Y",expand = c(0, 0)) +
 
   
   scale_fill_manual(values = c("#56B4E9", "#000000")) +
@@ -319,8 +319,8 @@ ggplot() +
                                          ",
                                          breaks = waiver())) +
   
-  scale_x_datetime(breaks = seq(as.POSIXct("2020-09-01"),
-                 as.POSIXct("2021-01-10"), "1 month"), date_labels = "%b %Y",expand = c(0, 0)) +
+  scale_x_datetime(breaks = seq(as.POSIXct("2021-01-01"),
+                 as.POSIXct("2021-03-31"), "2 weeks"), date_labels = "%b %d %Y",expand = c(0, 0)) +
 
   
   scale_fill_manual(values = c("#56B4E9", "#D55E00")) +
@@ -385,8 +385,8 @@ ggplot() +
                                          ",
                                          breaks = waiver())) +
   
-  scale_x_datetime(breaks = seq(as.POSIXct("2020-09-01"),
-                 as.POSIXct("2021-01-10"), "1 month"), date_labels = "%b %Y",expand = c(0, 0)) +
+  scale_x_datetime(breaks = seq(as.POSIXct("2021-01-01"),
+                 as.POSIXct("2021-03-31"), "2 weeks"), date_labels = "%b %d %Y",expand = c(0, 0)) +
 
   
   scale_fill_manual(values = c("#56B4E9", "#000000")) +
@@ -452,8 +452,8 @@ ggplot() +
                                          ",
                                          breaks = waiver())) +
    
-  scale_x_datetime(breaks = seq(as.POSIXct("2020-09-01"),
-                 as.POSIXct("2021-01-10"), "1 month"), date_labels = "%b %Y",expand = c(0, 0)) +
+  scale_x_datetime(breaks = seq(as.POSIXct("2021-01-01"),
+                 as.POSIXct("2021-03-31"), "2 weeks"), date_labels = "%b %d %Y",expand = c(0, 0)) +
 
   
   scale_fill_manual(values = c("#56B4E9", "#D55E00")) +
@@ -517,8 +517,8 @@ ggplot() +
                                          ",
                                          breaks = waiver())) +
    
-  scale_x_datetime(breaks = seq(as.POSIXct("2020-09-01"),
-                 as.POSIXct("2021-01-10"), "1 month"), date_labels = "%b %Y",expand = c(0, 0)) +
+  scale_x_datetime(breaks = seq(as.POSIXct("2021-01-01"),
+                 as.POSIXct("2021-03-31"), "2 weeks"), date_labels = "%b %d %Y",expand = c(0, 0)) +
 
   
   scale_fill_manual(values = c("#56B4E9", "#000000")) +
@@ -584,8 +584,8 @@ ggplot() +
                                          ",
                                          breaks = waiver())) +
  
-  scale_x_datetime(breaks = seq(as.POSIXct("2020-09-01"),
-                 as.POSIXct("2021-01-10"), "1 month"), date_labels = "%b %Y",expand = c(0, 0)) +
+  scale_x_datetime(breaks = seq(as.POSIXct("2021-01-01"),
+                 as.POSIXct("2021-03-31"), "2 weeks"), date_labels = "%b %d %Y",expand = c(0, 0)) +
   
   scale_fill_manual(values = c("#56B4E9", "#D55E00")) +
   
@@ -650,8 +650,8 @@ ggplot() +
                                          ",
                                          breaks = waiver())) +
    
-  scale_x_datetime(breaks = seq(as.POSIXct("2020-09-01"),
-                 as.POSIXct("2021-01-10"), "1 month"), date_labels = "%b %Y",expand = c(0, 0)) +
+  scale_x_datetime(breaks = seq(as.POSIXct("2021-01-01"),
+                 as.POSIXct("2021-03-31"), "2 weeks"), date_labels = "%b %d %Y",expand = c(0, 0)) +
 
   
   scale_fill_manual(values = c("#56B4E9", "#000000")) +
@@ -716,8 +716,8 @@ ggplot() +
                                          ",
                                          breaks = waiver())) +
    
-  scale_x_datetime(breaks = seq(as.POSIXct("2020-09-01"),
-                 as.POSIXct("2021-01-10"), "1 month"), date_labels = "%b %Y",expand = c(0, 0)) +
+  scale_x_datetime(breaks = seq(as.POSIXct("2021-01-01"),
+                 as.POSIXct("2021-03-31"), "2 weeks"), date_labels = "%b %d %Y",expand = c(0, 0)) +
 
   
   scale_fill_manual(values = c("#56B4E9", "#D55E00")) +
